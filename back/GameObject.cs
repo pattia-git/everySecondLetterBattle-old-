@@ -13,7 +13,8 @@ Contains game related data
 
 public class GameObject
 {
-    public bool whosTurn;
+    public string letterBoard;
+    public int whosTurn;
     public int player1Points;
     public int player2Points;
     public List<string> usedWords;
@@ -21,32 +22,5 @@ public class GameObject
     public List<string> player2Tiles;
 
     public GameObject(){}
-
-
-    public void checkUsedWords()
-    {
-        
-    }
-    public void checkValidWord()
-    {
-        
-    }
-    
-    
-
-    public void Player1Points()
-    {
-        foreach(var tile in guessedWord)
-        {
-            player1Points += 1;
-        }
-    }
-    public void Player2Points()
-    {
-        foreach (var tile in guessedWord)
-        {
-            player2Points += 1;
-        }
-    }
     
 }
