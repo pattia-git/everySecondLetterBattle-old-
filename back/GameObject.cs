@@ -13,7 +13,7 @@ Contains game related data
 
 public class GameObject
 {
-    public bool whosTurn;
+    public int whosTurn;
     public int player1Points;
     public int player2Points;
     public List<string> usedWords;
