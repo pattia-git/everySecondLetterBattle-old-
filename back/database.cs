@@ -10,7 +10,7 @@ public class Database
     private readonly string _port = "5433";
     private readonly string _username = "postgres";
     private readonly string _password = "ConfusedSandwichReading26";
-    private readonly string _database = "postgres";
+    private readonly string _database = "db2"; // change when DB is good
 
     private NpgsqlDataSource _connection;
 
