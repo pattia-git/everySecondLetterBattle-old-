@@ -1,4 +1,6 @@
-﻿namespace EverySecondLetterBattle;
+﻿using System.Runtime.InteropServices.JavaScript;
+
+namespace EverySecondLetterBattle;
 
 /*
 Contains game related data
@@ -11,7 +13,14 @@ Contains game related data
 
 public class GameObject
 {
+    public string letterBoard;
+    public int whosTurn;
+    public int player1Points;
+    public int player2Points;
+    public List<string> usedWords;
+    public List<string> player1Tiles;
+    public List<string> player2Tiles;
+
     public GameObject(){}
-    
     
 }
