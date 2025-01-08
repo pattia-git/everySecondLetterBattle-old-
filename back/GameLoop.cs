@@ -1,4 +1,6 @@
-﻿namespace EverySecondLetterBattle;
+﻿using Npgsql;
+
+namespace EverySecondLetterBattle;
 /*
  contains the "game"
  should not save data locally, but in GameObject
@@ -7,9 +9,11 @@
 
 public class GameLoop
 {
- public GameLoop()
+
+ private NpgsqlDataSource _db;
+ public GameLoop(NpgsqlDataSource db)
  {
-  
+  _db = db;
  }
 
  public GameObject _gameObject = new GameObject();
@@ -21,8 +25,8 @@ public class GameLoop
   _gameObject.whosTurn = 1;
   for (int i = 0; i < 7; i++)
   {
-   _generateTiles.letterSelector(_gameObject.player1Tiles);
-   _generateTiles.letterSelector(_gameObject.player2Tiles);
+   _generateTiles.LetterSelector(_gameObject.player1Tiles);
+   _generateTiles.LetterSelector(_gameObject.player2Tiles);
   }
 
   while (_gameObject.player1Points < 10 || _gameObject.player2Points < 10)
@@ -62,7 +66,7 @@ public class GameLoop
    
    _gameObject.letterBoard += _gameObject.player1Tiles[playedTile];
    _gameObject.player1Tiles.RemoveAt(playedTile);
-   _generateTiles.letterSelector(_gameObject.player1Tiles);
+   _generateTiles.LetterSelector(_gameObject.player1Tiles);
    
    Console.WriteLine("do you also want to guess? (y)");
    input = Console.ReadLine();
@@ -84,7 +88,7 @@ public class GameLoop
    
    _gameObject.letterBoard += _gameObject.player2Tiles[playedTile];
    _gameObject.player2Tiles.RemoveAt(playedTile);
-   _generateTiles.letterSelector(_gameObject.player2Tiles);
+   _generateTiles.LetterSelector(_gameObject.player2Tiles);
    
    Console.WriteLine("do you also want to guess? (y)");
    input = Console.ReadLine();

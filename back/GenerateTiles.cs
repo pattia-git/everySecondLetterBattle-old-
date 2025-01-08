@@ -17,9 +17,9 @@ public class GenerateTiles
     {
     }
     
-    private static Random _random = new Random();
+    private static Random _random = new();
 
-    public void letterSelector(List<string> activePlayer)
+    public void LetterSelector(List<string> activePlayer)
     {
         
         // add letter based on comonality in dictionary
