@@ -13,15 +13,15 @@ Contains game related data
 
 public class GameObject
 {
-    public string letterBoard;
+    public string letterBoard = "";
     public int whosTurn;
     public int player1Points;
     public int player2Points;
-    public List<string> usedValidWords;
-    public List<string> usedInvalidWords;
-    public List<string> player1Tiles;
-    public List<string> player2Tiles;
-
+    public List<string> usedValidWords = new List<string>();
+    public List<string> usedInvalidWords = new();
+    public List<string>? player1Tiles = new List<string>();
+    public List<string> player2Tiles = new List<string>();
+    
     public GameObject(){}
     
 }

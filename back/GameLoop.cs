@@ -53,40 +53,52 @@ public class GameLoop
   {
    _gameObject.letterBoard = "";
   }
-  
+
   // initial console for testing
-  
+
 
 
   if (_gameObject.whosTurn == 1)
   {
-   
-   Console.WriteLine("Tiles player 1:" + _gameObject.player1Tiles);
+   Console.WriteLine("Tiles player 1:");
+   foreach (var letter in _gameObject.player1Tiles)
+   {
+    Console.WriteLine(letter);
+   }
+
    Console.WriteLine("play a letter " + _gameObject.whosTurn + "(take index of guessed number)");
    string input = Console.ReadLine();
    int playedTile = int.Parse(input);
-   
+
    _gameObject.letterBoard += _gameObject.player1Tiles[playedTile];
    _gameObject.player1Tiles.RemoveAt(playedTile);
    _generateTiles.LetterSelector(_gameObject.player1Tiles);
-   
+
+
+   Console.WriteLine(_gameObject.letterBoard);
    Console.WriteLine("do you also want to guess? (y)");
+
    input = Console.ReadLine();
    if (input == "y")
    {
-    if (await _queries.GuessValidation(_gameObject.letterBoard) && !_gameObject.usedValidWords.Contains(_gameObject.letterBoard))
+    if (await _queries.GuessValidation(_gameObject.letterBoard) &&
+        !_gameObject.usedValidWords.Contains(_gameObject.letterBoard))
     {
      _gameObject.player1Points += _gameObject.letterBoard.Length;
-     _gameObject.usedValidWords.Add(_gameObject.letterBoard); 
+     _gameObject.usedValidWords.Add(_gameObject.letterBoard);
      _gameObject.letterBoard = "";
+     Console.WriteLine("you have " + _gameObject.player1Points + " points");
     }
     else if (!_gameObject.usedInvalidWords.Contains(_gameObject.letterBoard))
     {
      _gameObject.usedInvalidWords.Add(_gameObject.letterBoard);
      if (_gameObject.player1Points != 0)
      {
+      Console.WriteLine("line 95");
       _gameObject.player1Points -= 1;
      }
+
+     Console.WriteLine("line 98");
      _gameObject.letterBoard = "";
     }
     // make guess
@@ -97,27 +109,53 @@ public class GameLoop
   }
   else
   {
-   
-   Console.WriteLine("Tiles player 2:" + _gameObject.player2Tiles);
+   Console.WriteLine("Tiles player 2:");
+   foreach (var letter in _gameObject.player2Tiles)
+   {
+    Console.WriteLine(letter);
+   }
+
    Console.WriteLine("play a letter " + _gameObject.whosTurn + "(take index of guessed number)");
    string input = Console.ReadLine();
    int playedTile = int.Parse(input);
-   
+
    _gameObject.letterBoard += _gameObject.player2Tiles[playedTile];
    _gameObject.player2Tiles.RemoveAt(playedTile);
    _generateTiles.LetterSelector(_gameObject.player2Tiles);
-   
+
+
+   Console.WriteLine(_gameObject.letterBoard);
    Console.WriteLine("do you also want to guess? (y)");
+
    input = Console.ReadLine();
    if (input == "y")
    {
+    if (await _queries.GuessValidation(_gameObject.letterBoard) &&
+        !_gameObject.usedValidWords.Contains(_gameObject.letterBoard))
+    {
+     _gameObject.player2Points += _gameObject.letterBoard.Length;
+     _gameObject.usedValidWords.Add(_gameObject.letterBoard);
+     _gameObject.letterBoard = "";
+     Console.WriteLine("you have " + _gameObject.player2Points + " points");
+    }
+    else if (!_gameObject.usedInvalidWords.Contains(_gameObject.letterBoard))
+    {
+     _gameObject.usedInvalidWords.Add(_gameObject.letterBoard);
+     if (_gameObject.player2Points != 0)
+     {
+      Console.WriteLine("line 95");
+      _gameObject.player2Points -= 1;
+     }
+
+     Console.WriteLine("line 98");
+     _gameObject.letterBoard = "";
+    }
     // make guess
    }
 
    _gameObject.whosTurn = 1;
 
   }
+
  }
- 
- 
 }
