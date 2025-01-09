@@ -18,6 +18,7 @@ public class GameLoop
 
  public GameObject _gameObject = new GameObject();
  public GenerateTiles _generateTiles = new GenerateTiles();
+ public Queries _queries = new(gue);
 
  public void startGame()
  {
@@ -72,6 +73,8 @@ public class GameLoop
    input = Console.ReadLine();
    if (input == "y")
    {
+    if (_queries.GuessValidation(_gameObject.letterBoard))
+    bool response = 
     // make guess
    }
 
