@@ -25,7 +25,7 @@ public class GenerateTiles
         // add letter based on comonality in dictionary
         // ripped from Wikipedia https://en.wikipedia.org/wiki/Letter_frequency#Relative_frequencies_of_letters_in_the_English_language
         // doesn't add upp to 100%, but lets assume the remainder 0.41% is other characters
-
+        
         Dictionary<string, double> alphabet = new Dictionary<string, double>();
         alphabet.Add("A", 7.8);
         alphabet.Add("B", 2);
@@ -55,11 +55,19 @@ public class GenerateTiles
         alphabet.Add("Z",0.44);
         
         int generatedRnd = _random.Next(1, 9959);
-        double rnd = generatedRnd / 100;
-
+        double randomPercentage = generatedRnd / 100;
+        double previouspercentageAccumulation = 0;
+        double percentageAccumulation = 0;
+        
         foreach (var letter in alphabet)
         {
-            
+            percentageAccumulation += letter.Value;
+            if (previouspercentageAccumulation < randomPercentage &&  randomPercentage <= percentageAccumulation)
+            {
+                activePlayer.Add(letter.Key);
+                return;
+            }
+            previouspercentageAccumulation = percentageAccumulation;
         }
 
         
