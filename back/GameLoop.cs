@@ -9,16 +9,17 @@ namespace EverySecondLetterBattle;
 
 public class GameLoop
 {
+ 
+ public GameObject _gameObject = new GameObject();
+ public GenerateTiles _generateTiles = new GenerateTiles();
+ public Queries _queries;
 
  private NpgsqlDataSource _db;
  public GameLoop(NpgsqlDataSource db)
  {
  _db = db;
+ _queries = new Queries(_db);
  }
-
- public GameObject _gameObject = new GameObject();
- public GenerateTiles _generateTiles = new GenerateTiles();
- public Queries _queries = new(_db);
 
  public async Task startGame()
  {
