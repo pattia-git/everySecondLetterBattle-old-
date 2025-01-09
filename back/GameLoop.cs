@@ -36,10 +36,10 @@ public class GameLoop
    await playerTurn();
   }
 
-  if (_gameObject.player1Points == 10)
+  if (_gameObject.player1Points >= 10)
   {
    Console.WriteLine("player one wins!");
-  } else if (_gameObject.player2Points == 10)
+  } else if (_gameObject.player2Points >= 10)
   {
    Console.WriteLine("player two wins!");
   }
@@ -74,22 +74,20 @@ public class GameLoop
    input = Console.ReadLine();
    if (input == "y")
    {
-    if (await _queries.GuessValidation(_gameObject.letterBoard))
+    if (await _queries.GuessValidation(_gameObject.letterBoard) && !_gameObject.usedValidWords.Contains(_gameObject.letterBoard))
     {
      _gameObject.player1Points += _gameObject.letterBoard.Length;
+     _gameObject.usedValidWords.Add(_gameObject.letterBoard); 
      _gameObject.letterBoard = "";
     }
-    else
+    else if (!_gameObject.usedInvalidWords.Contains(_gameObject.letterBoard))
     {
+     _gameObject.usedInvalidWords.Add(_gameObject.letterBoard);
      if (_gameObject.player1Points != 0)
      {
       _gameObject.player1Points -= 1;
-      _gameObject.letterBoard = "";
      }
-     else
-     {
-      _gameObject.letterBoard = "";
-     }
+     _gameObject.letterBoard = "";
     }
     // make guess
    }
