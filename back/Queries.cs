@@ -17,10 +17,13 @@ public class Queries
             cmd.Parameters.AddWithValue(guess);
             await using (var reader = await cmd.ExecuteReaderAsync())
             {
-                
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+                return false;
             }
         }
-        
     }
     
     public async void ShowOne(string id)

@@ -13,14 +13,14 @@ public class GameLoop
  private NpgsqlDataSource _db;
  public GameLoop(NpgsqlDataSource db)
  {
-  _db = db;
+ _db = db;
  }
 
  public GameObject _gameObject = new GameObject();
  public GenerateTiles _generateTiles = new GenerateTiles();
- public Queries _queries = new(gue);
+ public Queries _queries = new(_db);
 
- public void startGame()
+ public async Task startGame()
  {
   // Sets initial players turn and popluates each players tiles
   _gameObject.whosTurn = 1;
@@ -32,7 +32,7 @@ public class GameLoop
 
   while (_gameObject.player1Points < 10 || _gameObject.player2Points < 10)
   {
-   playerTurn();
+   await playerTurn();
   }
 
   if (_gameObject.player1Points == 10)
@@ -46,7 +46,7 @@ public class GameLoop
   
  }
 
- public void playerTurn()
+ public async Task playerTurn()
  {
   if (_gameObject.letterBoard.Length == 10)
   {
@@ -73,8 +73,23 @@ public class GameLoop
    input = Console.ReadLine();
    if (input == "y")
    {
-    if (_queries.GuessValidation(_gameObject.letterBoard))
-    bool response = 
+    if (await _queries.GuessValidation(_gameObject.letterBoard))
+    {
+     _gameObject.player1Points += _gameObject.letterBoard.Length;
+     _gameObject.letterBoard = "";
+    }
+    else
+    {
+     if (_gameObject.player1Points != 0)
+     {
+      _gameObject.player1Points -= 1;
+      _gameObject.letterBoard = "";
+     }
+     else
+     {
+      _gameObject.letterBoard = "";
+     }
+    }
     // make guess
    }
 
