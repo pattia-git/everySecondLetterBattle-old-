@@ -31,7 +31,7 @@ public class GameLoop
    _generateTiles.LetterSelector(_gameObject.player2Tiles);
   }
 
-  while (_gameObject.player1Points < 10 || _gameObject.player2Points < 10)
+  while (_gameObject.player1Points < 10 && _gameObject.player2Points < 10)
   {
    await playerTurn();
   }
@@ -39,6 +39,7 @@ public class GameLoop
   if (_gameObject.player1Points >= 10)
   {
    Console.WriteLine("player one wins!");
+   
   } else if (_gameObject.player2Points >= 10)
   {
    Console.WriteLine("player two wins!");
@@ -94,8 +95,8 @@ public class GameLoop
      _gameObject.usedInvalidWords.Add(_gameObject.letterBoard);
      if (_gameObject.player1Points != 0)
      {
-      Console.WriteLine("line 95");
       _gameObject.player1Points -= 1;
+      Console.WriteLine("You lost 1 point new score is " + _gameObject.player1Points + " points");
      }
 
      Console.WriteLine("line 98");
@@ -143,8 +144,8 @@ public class GameLoop
      _gameObject.usedInvalidWords.Add(_gameObject.letterBoard);
      if (_gameObject.player2Points != 0)
      {
-      Console.WriteLine("line 95");
       _gameObject.player2Points -= 1;
+      Console.WriteLine("You lost 1 point new score is " + _gameObject.player2Points + " points");
      }
 
      Console.WriteLine("line 98");
