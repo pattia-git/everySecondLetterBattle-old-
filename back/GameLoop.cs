@@ -61,9 +61,11 @@ public class GameLoop
 
   if (_gameObject.whosTurn == 1)
   {
+   Console.WriteLine("Points player1 " + _gameObject.player1Points);
    Console.WriteLine("Tiles player 1:");
    foreach (var letter in _gameObject.player1Tiles)
    {
+    
     Console.WriteLine(letter);
    }
 
@@ -98,8 +100,12 @@ public class GameLoop
       _gameObject.player1Points -= 1;
       Console.WriteLine("You lost 1 point new score is " + _gameObject.player1Points + " points");
      }
+     else
+     {
+      Console.WriteLine("Wrong answer! You lost no points");
+     }
 
-     Console.WriteLine("line 98");
+     
      _gameObject.letterBoard = "";
     }
     // make guess
@@ -110,6 +116,7 @@ public class GameLoop
   }
   else
   {
+   Console.WriteLine("Points player2 " + _gameObject.player2Points);
    Console.WriteLine("Tiles player 2:");
    foreach (var letter in _gameObject.player2Tiles)
    {
@@ -147,8 +154,10 @@ public class GameLoop
       _gameObject.player2Points -= 1;
       Console.WriteLine("You lost 1 point new score is " + _gameObject.player2Points + " points");
      }
-
-     Console.WriteLine("line 98");
+     else
+     {
+      Console.WriteLine("Wrong answer! You lost no points");
+     }
      _gameObject.letterBoard = "";
     }
     // make guess
